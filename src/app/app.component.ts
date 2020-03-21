@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
 import { Item, ApiService } from './services/api.service';
 @Component({
   selector: 'app-root',
@@ -9,12 +9,24 @@ export class AppComponent implements OnInit{
   title = 'firstpwa';
   items: Array<Item>;
   isChecked = true;
-  test = '';
-  onChange() {
-    this.test = "amerika";
-  }
-  constructor(private apiService: ApiService) {}
-  ngOnInit() {
+  constructor(private viewContainerRef: ViewContainerRef, private cfr: ComponentFactoryResolver, private apiService: ApiService) {}
+
+    async getLazy1() {
+      this.viewContainerRef.clear();
+      const { Lazy1Component } = await import('./lazy1.component');
+      this.viewContainerRef.createComponent(
+        this.cfr.resolveComponentFactory(Lazy1Component)
+      );
+    }
+
+    async getLazy2() {
+      this.viewContainerRef.clear();
+      const { Lazy2Component } = await import('./lazy2.component');
+      this.viewContainerRef.createComponent(
+        this.cfr.resolveComponentFactory(Lazy2Component)
+      );
+    }
+    ngOnInit() {
     this.fetchData();
   }
   fetchData() {

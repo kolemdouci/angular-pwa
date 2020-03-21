@@ -3,11 +3,11 @@
     <span>JS-jargon</span>
   </mat-toolbar-row>
 </mat-toolbar>
-<mat-checkbox #showDetails [checked]="isChecked" (change)="onChange()" >Check me!</mat-checkbox>
-<div *ngIf="showDetails.checked">Some details</div>
-<input type="text" [value]="test">
-mat-radio-group>mat-radio-button*2
-
+<div>
+  <div>Hello World! This is the {{ title }} app.</div>
+  <button (click)='getLazy1()'>lazy 1</button>
+  <button (click)='getLazy2()'>lazy 2</button>
+</div>
 <main>
   <mat-card *ngFor="let item of items">
     <mat-card-header>
